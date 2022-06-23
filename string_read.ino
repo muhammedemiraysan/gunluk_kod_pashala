@@ -2,7 +2,7 @@
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27,16,2);
 String x;
-int i = 2 ;
+int i = 2;
 String solx = "";
 String soly = "";
 String sagx = "";
@@ -15,24 +15,25 @@ void setup() {
 }
 
 void loop() {
-  while (!Serial.available());
+  while (!Serial.available()){;}
   x = Serial.readString();
   lcd.backlight();
-  
+   
   while(x[i] != 'n'){
     solx += x[i];
     i++;
   }
   lcd.setCursor(0,0);
   lcd.print(String(solx));
+  i++;
   while(x[i] != 'n'){
     soly += x[i];
     i++;
   }
-  i++;
+  
   lcd.setCursor(5,0);
   lcd.print(String(soly));  
-
+  i++;
   while(x[i] != 'n'){
     sagx += x[i];
     i++;
@@ -46,10 +47,12 @@ void loop() {
   }
   lcd.setCursor(5,1);
   lcd.print(String(sagy));  
-  
+  if ( 0 >solx.toInt()){
+  lcd.setCursor(9,0);
+  lcd.print('x');      
+    }
   
   i = 2;
-  
   solx = "";
   soly = "";
   sagx = "";
