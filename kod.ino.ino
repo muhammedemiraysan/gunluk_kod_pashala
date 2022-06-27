@@ -21,7 +21,7 @@ void setup() {
 lcd.init();
 lcd.init();
 pinMode(13,OUTPUT);
-Serial.begin(115200); 
+Serial.begin(9600); 
 Serial.setTimeout(1);
 servo1.attach(servoPin1); servo1.writeMicroseconds(1470);
 servo2.attach(servoPin2); servo2.writeMicroseconds(1470);
@@ -65,11 +65,11 @@ void loop() {
   servo6b = -1*mapsagx;
   servo2c = 1*mapsagy; 
   servo5c = -1*mapsagy;
-  finalservo1 = 1470+servo1a+servo1b;
-  finalservo2 = 1470+servo2c;
-  finalservo3 = 1470+(-1*servo1a)+servo3b;
+  finalservo1 = 1480+servo1a+servo1b;
+  finalservo2 = 1475+servo2c;
+  finalservo3 = 1460+(-1*servo1a)+servo3b;
   finalservo4 = 1470+(-1*servo1a)+servo4b;
-  finalservo5 = 1470+servo5c;
+  finalservo5 = 1465+servo5c;
   finalservo6 = 1470+servo1a+servo6b;
   if(finalservo1 > 1800){finalservo1 = 1800;} if(finalservo1 <  1200){finalservo1 = 1200;}
   if(finalservo2 > 1800){finalservo2 = 1800;} if(finalservo2 <  1200){finalservo2 = 1200;}
@@ -83,10 +83,18 @@ void loop() {
   lcd.setCursor(0,1);
   lcd.print(String(finalservo4)+"/"+String(finalservo6)+"/"+String(finalservo5));
   i = 2;
+  servo1.writeMicroseconds(finalservo1);
+  servo2.writeMicroseconds(finalservo2);
+  servo3.writeMicroseconds(finalservo3);
+  servo4.writeMicroseconds(finalservo4);
+  servo5.writeMicroseconds(finalservo5);
+  servo6.writeMicroseconds(finalservo6);
+  
+  delay(200);
+  x = "";
   solx = "";
   soly = "";
   sagx = "";
   sagy = "";
-  delay(100);
   lcd.clear();
   }
